@@ -1,20 +1,15 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardProduct from "../components/CardProduct";
+import { CartContext } from "../components/context/CartProvider";
 import { ProductModel } from "../models/product";
 
 const List = () => {
-  let list : ProductModel[] = [
-    {
-      id: 1,
-      name: "shoes",
-      price: 99999,
-    },
-  ];
-  const [products, setProducts] = useState<ProductModel[]>(list);
+  const {listProduct} = useContext(CartContext)
   return (
     <div>
-      {products.map((item,index)=>{
+      <h1>List Page</h1>
+      {listProduct.map((item,index)=>{
         return(
           <div key={index}>
            <CardProduct product={item}/>
@@ -26,7 +21,6 @@ const List = () => {
           Ver home
         </a>
       </Link>
-      <p>Pagina de products</p>
     </div>
   );
 };
