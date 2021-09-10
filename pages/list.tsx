@@ -1,21 +1,16 @@
 import Link from "next/link";
 import { useContext, useState } from "react";
+import CardContainer from "../components/CardContainer";
 import CardProduct from "../components/CardProduct";
 import { CartContext } from "../components/context/CartProvider";
 import { ProductModel } from "../models/product";
+import { getDataML } from "../util/api-ml";
 
-const List = () => {
-  const {listProduct} = useContext(CartContext)
+const List = ({title,data}) => {
   return (
     <div>
-      <h1>List Page</h1>
-      {listProduct.map((item,index)=>{
-        return(
-          <div key={index}>
-           <CardProduct product={item}/>
-          </div>
-        )
-      })}
+      <h1>{title}</h1>
+      <CardContainer products={data}/>
       <Link href="/">
         <a>
           Ver home
@@ -25,3 +20,12 @@ const List = () => {
   );
 };
 export default List;
+export async function getStaticProps() {
+  return {
+    props: {
+      title: "Home Static Props",
+      data: await getDataML("q=notebook"),
+    },
+  };
+}
+

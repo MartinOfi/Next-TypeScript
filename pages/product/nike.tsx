@@ -1,11 +1,16 @@
 import { ProductModel } from "../../models/product";
 
-const Detail = () => {
-
-  return <div>Detalles</div>;
+const Detail = ({ producto }) => {
+  return (
+    <div>
+      <p>{producto.name}</p>
+      <p>{producto.price}</p>
+    </div>
+  );
 };
+
 export default Detail;
- export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   let data: ProductModel = { id: 3, name: "Shirt", price: 4444 };
   return {
     props: {
@@ -13,4 +18,3 @@ export default Detail;
     },
   };
 }
- 
